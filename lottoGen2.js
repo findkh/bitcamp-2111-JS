@@ -6,8 +6,7 @@ for (let i=1; i<=45; i++){
 console.log(arr)
 
 for(let i=0; i<6; i++){
-    const idx = parsInt(Math.random()*arr.length)
-
+    const idx = parseInt(Math.random()*arr.length+1)
    console.log(arr.splice(idx,1))
 }
 //6번 뽑기
