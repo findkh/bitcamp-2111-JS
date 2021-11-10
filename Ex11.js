@@ -6,7 +6,7 @@ const pointArr = [
     {name:'D', xpos: 6, ypos: 6 }
 ]
 
-const target = {xpos:6, ypos:3}
+const target = {xpos:3, ypos:9}
 
 // for of와 같은 코드
 // for(let i=0; i<pointArr; i++){
