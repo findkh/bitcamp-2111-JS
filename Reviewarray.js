@@ -11,7 +11,7 @@ console.log(city[2])
 //배열 끝에서부터 항목 추가하기
 let newLength = city.push('강릉')
 console.log(newLength)
-//push하면 추가된 배열의 갯수를 출력한다
+//push하면 추가된 배열의 개수를 출력한다
 console.log(city)
 
 //배열 앞에 항목 추가하기
