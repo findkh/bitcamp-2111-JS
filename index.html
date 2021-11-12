@@ -12,20 +12,10 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-    <script>
-        //dom처리가 끝나면 로직을 수정해라.
-        window.addEventListener('DOMContentLoaded', (event) => {
-            console.log('DOM fully loaded and parsed');
-        });
-
-    </script>
-
         <div class="d-flex" id="wrapper">
-            <h1 id="nick">ParkKH Code</h1>
-
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
+                <div class="sidebar-heading border-bottom bg-light"><a href="index.html">Start Bootstrap</a></div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
@@ -33,6 +23,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="lotto.html">Lotto</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -80,9 +71,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-    <script>
-        const nick = document.getElementById("nick")
-        console.log(nick)
-    </script>
+        <script src="js/lotto.js"></script>
     </body>
 </html>
