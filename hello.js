@@ -1,8 +1,9 @@
 //홀짝 프로그램 만들기
-const prompt = require('prompt-sync')()
-const num = parseInt((Math.random()*100) % 2)
-console.log(num)
 
+const num = parseInt((Math.random()*100) % 2)
+// console.log(num)
+
+const prompt = require('prompt-sync')()
 // 사용자에게 입력 받아야 함
 const answer = prompt("ODD O? EVEN E?")
 //num이 0이고 answer가 E
