@@ -24,6 +24,7 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="lotto.html">Lotto</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="lotto2.html">Lotto2</a>
         </div>
     </div>
     <!-- Page content wrapper-->
@@ -57,7 +58,22 @@
             <button class="btn btn-primary" id="btn"> CLICK</button>
             <!--버튼 만드는 코드-->
 
-            <div id="resultDiv">
+            <style>
+                #resultDiv {
+                    display: flex;
+                }
+
+                #resultDiv > h3{
+                    background-color: #0a58ca;
+                    color : white;
+                    margin : 10px;
+                    padding: 20px;
+                    border-radius: 40px;
+                    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+                }
+            </style>
+
+            <div id="resultDiv"><!-- 로또번호가 나올 부분-->
 
             </div>
 
@@ -73,5 +89,15 @@
 <script src="js/scripts.js"></script>
 
 <script src="js/lotto.js"></script>
+
+<script>
+    console.log("------")
+    console.log(btn)
+
+    btn.addEventListener("click", function(){
+
+    }, false)
+</script>
+
 </body>
 </html>
