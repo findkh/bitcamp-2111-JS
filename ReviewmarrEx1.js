@@ -8,18 +8,16 @@ arr2 = [
 ];
 
 //배열 출력하기
+let tmparr2 = []
 for (let i = 0; i < arr2.length; i++) {
-    let fullarr = arr2[i]
-    console.log(fullarr)
+    tmparr2 = arr2[i]
+    console.log(tmparr2)
 }
 
-//3분기의 8월이 매출이 가장 좋다 라는 결과가 나올 수 있게 만들기
-
     let sum = 0
-
-    for(let j=0; j<fullarr.length; j++){
-        sum += fullarr[j]
-        console.log(fullarr)
+    for(let j=0; j<tmparr2.length; j++){
+        sum += tmparr2[j].total
+        console.log(sum)
     }
 //     const tempAvg = (sum/tempArr.length).toFixed(2)
 //
