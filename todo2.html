@@ -122,9 +122,11 @@
         //배열데이터 가져와서 화면으로 바꿔줌
         const todoArr = todoService.getAll()
 
+        //JS 구조 분해 할당
         let str=''
+        //``을 문자열로 만들어 주고 forloop가 반복한 만큼 만들어준다.(반복만큼 <tr> 태그가 생김)
 
-        for (let i = 0; i < todoArr.length; i++) {
+        for (let i = 0; i < todoArr.length; i++) { //문자열을 만들어냄
             const{idx,title,dueDate,complete} = todoArr[i]
 
             str += `<tr>
