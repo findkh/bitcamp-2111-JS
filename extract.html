@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    const msg = localStorage.getItem("sample")
+
+    //문자열(JSON)을 JS 객체로 변환
+
+    const obj = JSON.parse(msg)
+
+    console.dir(obj)
+
+    const arrStr = localStorage.getItem("products")
+
+    const products = JSON.parse(arrStr)
+    //파싱한다.
+
+    for (let i = 0; i < products.length; i++) {
+        console.log(products[i])
+    }
+
+</script>
+
+</body>
+</html>
