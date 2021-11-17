@@ -23,7 +23,7 @@
         console.log("loadData: " + serverInfo )
 
         fetch(serverInfo)
-            .then(  response => response.json())
+            .then(  response => response.json()) //데이터를 가지고 오면
                 //데이터 가져오면 콜백함수를 가지고 뭘 해줘 라고 함
                 // 서버에서 데이터를 가져옴
             .then(  data => {
@@ -45,17 +45,22 @@
          //li 태그 만드는 for문
             console.log(arr[i]) // 가게 리스트들이 나옴
             str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li>`
+
         }//end for
+
 
         ulEle.innerHTML = str
     }
+
+
+
 
     document.querySelector(".storeList").addEventListener("click", (e) => {
         e.stopPropagation()
         e.preventDefault()
         const target = e.target
 
-        if(target.tagName !== 'LI'){
+        if(target.tagName !== 'li'){
             return
         }
 

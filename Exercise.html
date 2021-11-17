@@ -39,6 +39,7 @@
 <!-- 목록창 -->
 <ul class="storeList">
 
+
 </ul>
 
 <!-- 지도 띄우기 -->
@@ -59,7 +60,6 @@
     const markerArr = []
 
     function showMarkers(stores){
-
         //기존 마커들은 지워야 한다.
         for (let i = 0; i < markerArr.length; i++) {
             markerArr[i].setMap(null)
@@ -88,7 +88,7 @@
         if(target.tagName !== 'A'){
             return
         }
-        console.log("A태그 클릭")
+        // console.log("A태그 클릭")
 
         const keyword = target.getAttribute("href")
 
@@ -99,14 +99,12 @@
         }else {
             showMarkers(arr)
         }
-
-
     }, false)
+</script>
     //-------------------------------------------
+<script>
     function loadData(serverInfo){
-
-        console.log("loadData: " + serverInfo )
-
+        // console.log("loadData: " + serverInfo )
         fetch(serverInfo)
             .then(  response => response.json())
             .then(  data => {
@@ -114,7 +112,6 @@
                 makeList(data)
                 showMarkers(data)
             })
-
     }
 
     //@@가게 목록 화면출력@@
@@ -124,15 +121,25 @@
 
         for (let i = 0; i < arr.length ; i++) {
             console.log(arr[i])
-            str += `<a href="${arr[i].url}"><li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li></a>`
-        }//end for
+            str += `<a href="${arr[i].url}"><li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng} data-img="${arr[i].img}" >${arr[i].name}</li></a>`
 
+        }//end for
+        ulEle.innerHTML = str
+    }
+    function makeList2(arr){
+        const ulEle=document.querySelector(".storeList")
+        let str = ''
+
+        for (let i = 0; i < arr.length; i++) {
+            // console.log(arr[i])
+            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" data-img="${arr[i].img}">${arr[i].name}</li>`
+            str += `<img src="${arr[i].img}">`
+
+        }
         ulEle.innerHTML = str
     }
 
-
-
-    //@@가게목록 가게이름을 누르면 반응하는것@@
+    //.storeList 안에 있는 개체를 누르면
     document.querySelector(".storeList").addEventListener("click", (e) => {
         e.stopPropagation()
         e.preventDefault()
@@ -149,15 +156,15 @@
         const name = target.getAttribute("data-name")
         const lat = target.getAttribute("data-lat")
         const lng = target.getAttribute("data-lng")
+        const img = target.getAttribute("data-img")
 
 
         const storeLi = [
-            {name:`${name}` , lat: `${lat}` , lng: `${lng}`}
+            {name:`${name}` , lat: `${lat}` , lng: `${lng}`, img : `${img}`}
         ]
 
-
-
         showMarkers(storeLi)
+        makeList2(storeLi)
 
     },false)
 </script>
