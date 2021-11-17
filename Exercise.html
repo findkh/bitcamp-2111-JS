@@ -27,15 +27,13 @@
     padding: 10px;
   }
 
-
-
 </style>
 
 <!-- 목록버튼 -->
 <div class="menuDiv">
   <button onclick="loadData('http://localhost:5555/w17/1team.json')">1팀</button>
   <button onclick="loadData('http://localhost:5555/w17/2team.json')">2팀</button>
-  <button onclick="loadData('http://localhost:5555/:5555/w17/3team.json')">3팀</button>
+  <button onclick="loadData('http://localhost:5555/w17/3team.json')">3팀</button>
 </div>
 
 <!-- 목록창 -->
@@ -44,7 +42,8 @@
 </ul>
 
 <!-- 지도 띄우기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63d16a88212b46758759f3136d823241"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16d3cc5164f1852a58f927a2c879e83d
+"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -113,6 +112,7 @@
             .then(  data => {
                 //console.log(data)
                 makeList(data)
+                showMarkers(data)
             })
 
     }
