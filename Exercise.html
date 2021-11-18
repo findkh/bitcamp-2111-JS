@@ -58,37 +58,35 @@
 
 <script>
     const markerArr = []
-
     function showMarkers(stores){
-        //기존 마커들은 지워야 한다.
+        // 기존 마커들은 지워야 한다.
         for (let i = 0; i < markerArr.length; i++) {
             markerArr[i].setMap(null)
         }
-
-        for (let i = 0; i <stores.length ; i++) {
+        for (let i = 0; i < stores.length; i++) {
             const store = stores[i]
-            const latLng = new kakao.maps.LatLng(store.lat, store.lng);
+            const latLng = new kakao.maps.LatLng(store.lat, store.lng)
             const marker = new kakao.maps.Marker({
                 map:map,
                 position: latLng,
                 title: store.name
             })
             markerArr.push(marker)
-        }//end for
+        }// end for
     }
-    // 목록선택창
-    document.querySelector(".menuDiv").addEventListener("click", (e) => {
+
+    //목록선택창
+    document.querySelector(".menuDiv").addEventListener("click", (e)=>{
         e.preventDefault()
         e.stopPropagation()
-
-        //1팀 2팀 3팀 골라주기
         const target = e.target
-
-        // a태그가 아닌걸 클릭하면 아무것도 아님
+        // console.log(target)
         if(target.tagName !== 'A'){
             return
         }
         // console.log("A태그 클릭")
+        // getAttribute 중요, setAttribute 생각
+        // console.log(target.getAttribute("href"))
 
         const keyword = target.getAttribute("href")
 
@@ -96,77 +94,71 @@
             const result = arr.filter(s => s.menu === keyword)
 
             showMarkers(result)
-        }else {
+        }else{
             showMarkers(arr)
         }
     }, false)
 </script>
-    //-------------------------------------------
+
 <script>
     function loadData(serverInfo){
-        // console.log("loadData: " + serverInfo )
-        fetch(serverInfo)
-            .then(  response => response.json())
-            .then(  data => {
-                //console.log(data)
+        // console.log("loadData: " + serverInfo)
+        fetch(serverInfo).then((response) => response.json())
+            .then(data => {
+                //  console.log(data)
                 makeList(data)
                 showMarkers(data)
             })
-    }
+        //가게 목록 화면 출력
+        function makeList(arr){
+            const ulEle=document.querySelector(".storeList")
+            let str = ''
 
-    //@@가게 목록 화면출력@@
-    function makeList(arr){
-        const ulEle = document.querySelector(".storeList")
-        let str = ''
-
-        for (let i = 0; i < arr.length ; i++) {
-            console.log(arr[i])
-            str += `<a href="${arr[i].url}"><li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng} data-img="${arr[i].img}" >${arr[i].name}</li></a>`
-
-        }//end for
-        ulEle.innerHTML = str
-    }
-    function makeList2(arr){
-        const ulEle=document.querySelector(".storeList")
-        let str = ''
-
-        for (let i = 0; i < arr.length; i++) {
-            // console.log(arr[i])
-            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" data-img="${arr[i].img}">${arr[i].name}</li>`
-            str += `<img src="${arr[i].img}">`
-
+            for (let i = 0; i < arr.length; i++) {
+                // console.log(arr[i])
+                str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" data-img="${arr[i].img}">${arr[i].name}</li>`
+            }
+            ulEle.innerHTML = str
         }
-        ulEle.innerHTML = str
+        function makeList2(arr){
+            const ulEle=document.querySelector(".storeList")
+            let str = ''
+
+            for (let i = 0; i < arr.length; i++) {
+                // console.log(arr[i])
+                str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" data-img="${arr[i].img}">${arr[i].name}</li>`
+                str += `<img src="${arr[i].img}">`
+
+            }
+            ulEle.innerHTML = str
+        }
+        // .storeList 안에 있는 누르면  개체를 누르면
+        document.querySelector(".storeList").addEventListener("click",(e)=>{
+            e.stopPropagation()
+            e.preventDefault()
+            //li만 잡히게
+            const target = e.target
+
+            //li가 아닌걸 누르면 안나옴옴
+           if(target.tagName !== 'LI'){
+                return
+            }
+            // console.log(target)
+            const name = target.getAttribute("data-name")
+            const lat = target.getAttribute("data-lat")
+            const lng = target.getAttribute("data-lng")
+            const img = target.getAttribute("data-img")
+            // console.log(name,lat,lng)
+            let storeLI = [{name: `${name}`, lat: `${lat}`, lng: `${lng}`,  img:`${img}`}]
+            showMarkers(storeLI)
+            makeList2(storeLI)
+
+
+        }, false)
+
     }
 
-    //.storeList 안에 있는 개체를 누르면
-    document.querySelector(".storeList").addEventListener("click", (e) => {
-        e.stopPropagation()
-        e.preventDefault()
 
-        //li만 잡하게
-        const target = e.target
-
-        //li가 아닌걸 누르면 아무것도 아님
-        if(target.tagName !== 'LI'){
-            return
-        }
-
-        console.log(target)
-        const name = target.getAttribute("data-name")
-        const lat = target.getAttribute("data-lat")
-        const lng = target.getAttribute("data-lng")
-        const img = target.getAttribute("data-img")
-
-
-        const storeLi = [
-            {name:`${name}` , lat: `${lat}` , lng: `${lng}`, img : `${img}`}
-        ]
-
-        showMarkers(storeLi)
-        makeList2(storeLi)
-
-    },false)
 </script>
 
 </body>
