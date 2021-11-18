@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--지도 나오는 부분 -->
+<div id="map" style="width:100vw;height:50vh;"></div>
+<!--버튼 -->
+<div class="panel">
+    <button onclick="changeData('http://localhost:5555/w17/1team.json')">1팀</button>
+    <button onclick="changeData('http://localhost:5555/w17/2team.json')">2팀</button>
+    <button onclick="changeData('http://localhost:5555/w17/3team.json')">3팀</button>
+</div>
+
+<ul class="storeList">
+</ul>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16d3cc5164f1852a58f927a2c879e83d"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.49942089895618, 127.02899407164077), // 지도의 중심좌표
+            level: 4 // 지도의 확대 레벨
+        };
+
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+</script>
+
+<script src="ex4.js"></script>
+
+<script>//화면과 관련된 부분
+    function  changeData(url){
+        alert("changeData")
+        storeService.loadData(url, (arr) => {
+            console.log("callback.......")
+            console.log(arr)
+            makeList(arr)
+            showMarkers(arr)
+        })
+    }
+
+    function makeList(arr){
+    const storeULEle = document.querySelector(".storeList")
+    let str = ''
+
+    for (let i = 0; i < arr.length ; i++) {
+        console.log(arr[i])
+        str += `<li data-idx="${i}">${arr[i].name}</li>`
+    }//end for
+
+    storeULEle.innerHTML = str
+}
+
+    const markerArr = []
+
+    function showMarkers(stores){
+            for (let i = 0; i < markerArr.length; i++) {
+                markerArr[i].setMap(null)
+            }
+
+            for (let i = 0; i < stores.length; i++) {
+                const store = stores[i]
+                const latLng = new kakao.maps.LatLng(store.lat, store.lng)
+                const marker = new kakao.maps.Marker({
+                    map:map,
+                    position: latLng,
+                    title: store.name
+                })
+                markerArr.push(marker)
+            } //end for
+        }
+
+    document.querySelector(".storeList").addEventListener("click",(e) =>{
+        e.preventDefault()
+        e.stopPropagation()
+        const target = e.target
+
+        const idx = target.getAttribute("data-idx")
+        const store = storeService.getdDataByIndex(idx)
+        console.log(store)
+
+        showMarkers([store])
+
+    },false)
+
+
+
+
+</script>
+
+</body>
+</html>
