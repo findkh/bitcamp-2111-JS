@@ -178,10 +178,11 @@
 
     const idx = liEle.getAttribute("data-idx")
     console.log("IDX: " + idx)
+    //클릭한 부분의 IDX 값을 가져오는 곳
 
     const targetMenu = menus[idx]
     const targetPicture = targetMenu.picture
-    popEle.querySelector("img").setAttribute("src", targetPicture)
+    popEle.querySelector("img").setAttribute("src", targetPicture) //setAttribute로 속성을 추가한다
     popEle.querySelector("h3").setAttribute("data-idx", idx)
     togglePop()
   },false)
@@ -189,6 +190,7 @@
   popEle.addEventListener("click", () => {
     popEle.setAttribute("class", "pop hide")
   },false)
+  //클릭이벤트. 클릭하면 pop창이 숨겨진다
 
   function togglePop() {
     const classValue = popEle.getAttribute("class")
@@ -203,7 +205,6 @@
     }else {
       popEle.setAttribute("class", "pop show")
     }
-
   }
 
 
@@ -214,7 +215,7 @@
     const menu = menus[target.getAttribute("data-idx")]
     console.log(menu)
 
-    addCart(menu)
+    // addCart(menu)
 
   }, false)
 
