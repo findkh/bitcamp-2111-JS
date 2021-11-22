@@ -35,13 +35,6 @@
                 </ul>
             </div>
         </div>
-
-        <!--        <div class="col-md-2 btn-group btn-group-lg" role="group" aria-label="Basic outlined example">-->
-        <!--        </div>-->
-        <div>
-
-        </div>
-
     </div>
 </div>
 
@@ -58,7 +51,7 @@
     var map = new kakao.maps.Map(mapContainer, mapOption);
 </script>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16d3cc5164f1852a58f927a2c879e83d"></script>
+
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -89,11 +82,28 @@ function makeList(arr){
 
     for (let i = 0; i < arr.length ; i++) {
         console.log(arr[i])
-        str += `<li sno="${i}">${arr[i].sname}</li>`
+        str += `<li-sno="${i}">${arr[i].sname}</li>`
     }//end for
 
     storeULEle.innerHTML = str
 }
+
+    // document.querySelector(".storeList").addEventListener("click", (e) => {
+    //     e.stopPropagation()
+    //     e.preventDefault()
+    //     const target = e.target
+    //
+    //     if(target.tagName !== 'LI'){
+    //         return
+    //     }
+    //
+    //     console.log(target)
+    //     const name = target.getAttribute("data-name")
+    //     const lat = target.getAttribute("data-lat")
+    //     const lng = target.getAttribute("data-lng")
+    //
+    //     console.log(name, lat, lng)
+    // },false)
 
 const markerArr = []
 function showMarkers(stores){
@@ -122,9 +132,7 @@ document.querySelector(".storeList").addEventListener("click",(e) =>{
     const idx = target.getAttribute("data-idx")
     const store = storeService.getdDataByIndex(idx)
     console.log(store)
-
     showMarkers([store])
-
 },false)
 </script>
 </body>
