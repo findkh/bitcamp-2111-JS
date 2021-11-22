@@ -30,9 +30,8 @@
                 <button type="button btn-group-s" class="btn btn-outline-primary" onclick="changeData('http://localhost:5555/w22/1team.json')">한식</button>
                 <button type="button btn-group-s" class="btn btn-outline-primary" onclick="changeData('http://localhost:5555/w22/2team.json')">일식</button>
                 <button type="button btn-group-s" class="btn btn-outline-primary" onclick="changeData('http://localhost:5555/w22/3team.json')">프랜차이즈</button>
-                <ul class="storeList col-md-3">
-
-                </ul>
+                <div class="storeList col-md-3">
+                </div>
             </div>
         </div>
     </div>
@@ -67,7 +66,7 @@
 
 <script>//화면과 관련된 부분
 function  changeData(url){
-    alert("changeData")
+    // alert("changeData")
     storeService.loadData(url, (arr) => {
         // console.log("callback.......")
         // console.log(arr)
@@ -82,28 +81,11 @@ function makeList(arr){
 
     for (let i = 0; i < arr.length ; i++) {
         console.log(arr[i])
-        str += `<li-sno="${i}">${arr[i].sname}</li>`
+        str += `<div data-idx="${i}">${arr[i].sname}</div>`
     }//end for
 
     storeULEle.innerHTML = str
 }
-
-    // document.querySelector(".storeList").addEventListener("click", (e) => {
-    //     e.stopPropagation()
-    //     e.preventDefault()
-    //     const target = e.target
-    //
-    //     if(target.tagName !== 'LI'){
-    //         return
-    //     }
-    //
-    //     console.log(target)
-    //     const name = target.getAttribute("data-name")
-    //     const lat = target.getAttribute("data-lat")
-    //     const lng = target.getAttribute("data-lng")
-    //
-    //     console.log(name, lat, lng)
-    // },false)
 
 const markerArr = []
 function showMarkers(stores){
