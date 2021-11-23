@@ -27,10 +27,13 @@
 
         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">버튼 클릭</div>
-            <div class="card-body">
-                <button type="button btn-group-s" class="btn btn-outline-primary" onclick="changeData('http://localhost:5555/211122/1team.json')">한식</button>
-                <button type="button btn-group-s" class="btn btn-outline-primary" onclick="changeData('http://localhost:5555/211122/2team.json')">일식</button>
-                <button type="button btn-group-s" class="btn btn-outline-primary" onclick="changeData('http://localhost:5555/211122/3team.json')">프랜차이즈</button>
+            <div class="card-body" style="height: 30px;">
+                <a class="btn btn-outline-primary" role="button" style="float:right; margin: 10px" onclick="changeData('http://localhost:5555/211122/1team.json')">한식</a>
+                <a class="btn btn-outline-primary" role="button" style="float:right; margin: 10px" onclick="changeData('http://localhost:5555/211122/2team.json')">일식</a>
+                <a class="btn btn-outline-primary" role="button" style="float:right; margin: 10px" onclick="changeData('http://localhost:5555/211122/3team.json')">프랜차이즈</a>
+            </div>
+
+            <div>
                 <div class="storeList col-md-3">
                 </div>
             </div>

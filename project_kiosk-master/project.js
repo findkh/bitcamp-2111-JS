@@ -33,8 +33,8 @@
 
     $(document).ready(function(){
         $("#tabs").tabs()
-
     })
+
     $("#tabs #first").on("click", function (e){
         e.preventDefault()
         e.stopPropagation()
@@ -44,10 +44,7 @@
             console.log(arr)
             menuList(arr)
         })//getJSON
-
-
     })// click
-
     $("#tabs #second").on("click", function (e){
         e.preventDefault()
         e.stopPropagation()
@@ -56,27 +53,25 @@
         $.getJSON(url,function(arr){
             console.log(arr)
             menuList2(arr)
-
         })//getJSON
       })// click
-        $("#tabs #third").on("click", function (e){
-            e.preventDefault()
-            e.stopPropagation()
+    $("#tabs #third").on("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
             //e.target.getAttribute("data-url")
-            const url = $(e.target).data("url")
-            $.getJSON(url,function(arr){
-                console.log(arr)
-                menuList3(arr)
-
-            })//getJSON
-
+        const url = $(e.target).data("url")
+        $.getJSON(url,function(arr){
+            console.log(arr)
+            menuList3(arr)
+        })//getJSON
     })// click
 
-            function menuList(arr) {
-                const menuList = document.querySelector(".coffee") // menuList 변수에 class가 .menuList인 태그 주소를 넣는다.
-                let str = '' //값을 유지하기 위해 전역변수 선언
 
-                for (let i = 0; i < arr.length; i++) {
+    function menuList(arr) {
+
+    const menuList = document.querySelector(".coffee") // menuList 변수에 class가 .menuList인 태그 주소를 넣는다.
+        let str = '' //값을 유지하기 위해 전역변수 선언
+        for (let i = 0; i < arr.length; i++) {
                     const menu = arr[i]
                     console.log(arr[i])
                     str += `  <div class="col">
@@ -85,7 +80,8 @@
                   <div class="card-body">
                     <div>${menu.name}</div>
                     <div>${menu.price}</div>
-                    <button>구매</button>
+                    <button id="add">add</button>
+                    <button id="delete">delete</button>
                   </div>
                 </div>
               </div>`
@@ -101,11 +97,8 @@
             const idx = divEle.getAttribute("coffee-idx")
             const menu = arr[idx]
 
-
             bill(menu)
             showOrderItems()
-
-
         }, false)}
 
 
@@ -121,14 +114,15 @@
                     <div>${menu.name}</div>
                     <div>${menu.price}</div>
                     <div>
-                    <button type="button" class="btn btn-primary">addCart</button>
+                    <button id="add">add</button>
+                    <button id="delete">delete</button>
                     </div>
                   </div>
                 </div>
               </div>`
 
-}
-    menuList2.innerHTML = str2
+    }
+        menuList2.innerHTML = str2
 
 
     menuList2.addEventListener("click", (e)=> {
@@ -159,7 +153,8 @@
                     <div>${menu.name}</div>
                     <div>${menu.price}</div>
                     <div>
-                    <button type="button" class="btn btn-primary">addCart</button>
+                    <button>add</button>
+                    <button id="delete">delete</button>
                     </div>
                   </div>
                 </div>
@@ -193,18 +188,16 @@
     console.log(result)
     // result는 리모콘이므로 result[0]은 곧 중복값이 있던 orders[아무개]가 됨
 
-    if(result.length > 0){
-    result[0].qty += 1
+        if(result.length > 0){
+         result[0].qty += 1
 
-}else {
-    orders.push({...menu, qty:1})
+         }else {
+            orders.push({...menu, qty:1})
+        }
+
+        console.log(orders)
+        showOrderItems()
 }
-
-    console.log(orders)
-    showOrderItems()
-}
-
-
 
         function showOrderItems() {
         const orderListEle = document.querySelector(".orderlist")
