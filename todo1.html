@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //함수 f(x) => y
+    //상태가 없다.
+    //상태를 유지할 수 있는 방법이 필요
+
+    //함수는 1급 객체
+    //변수의 위치 함수가 가능
+
+const arr = []
+//let대신 var를 쓰면 호이스팅이 일어남 /클로저 설명
+    for (let i = 0; i <10; i++) {
+        arr.push(function (){
+            console.log(i)
+            //함수10개가 따로 있음
+            //not defined가 뜨지 않은 이유 : 함수안에는 i라는 변수가 존재 하지 않았지만
+            //외부 for에 i라는 변수가 있어서 참조한 거다.
+            // 이것을 클로저의 (숨겨진/암묵적인/눈에보이지 않는) 참조라고 한다
+        })
+    }
+    console.log(arr)
+    console.log("-------------------")
+    for (let i = 0; i < arr.length; i++) {
+        arr[i]()
+    }
+
+    for(var i=0;i<10;i++){
+        console.log(i)
+    }
+    console.log("after"+i) //after 10 출력
+</script>
+</body>
+</html>
