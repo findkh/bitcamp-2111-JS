@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:100vw;height:50vh;"></div>
+<div id="result"></div>
+
+<style>
+
+  .menuDiv {
+    display: flex;
+    margin: 50px;
+    justify-content: space-between;
+
+  }
+
+  .menuDiv > a {
+    text-decoration: none;
+    background-color: blue;
+    color: white;
+    font-size: large;
+    border-radius: 3px;
+    padding: 10px;
+  }
+
+</style>
+
+<!-- 목록버튼 -->
+<div class="menuDiv">
+  <button onclick="loadData('http://localhost:5555/w17/1team.json')">1팀</button>
+  <button onclick="loadData('http://localhost:5555/w17/2team.json')">2팀</button>
+  <button onclick="loadData('http://localhost:5555/w17/3team.json')">3팀</button>
+</div>
+
+<!-- 목록창 -->
+<ul class="storeList">
+
+
+</ul>
+
+<!-- 지도 띄우기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=16d3cc5164f1852a58f927a2c879e83d
+"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(37.4988972,127.0301971), // 지도의 중심좌표
+            level: 4 // 지도의 확대 레벨
+        };
+
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+</script>
+
+<script>
+    const markerArr = []
+    function showMarkers(stores){
+        // 기존 마커들은 지워야 한다.
+        for (let i = 0; i < markerArr.length; i++) {
+            markerArr[i].setMap(null)
+        }
+        for (let i = 0; i < stores.length; i++) {
+            const store = stores[i]
+            const latLng = new kakao.maps.LatLng(store.lat, store.lng)
+            const marker = new kakao.maps.Marker({
+                map:map,
+                position: latLng,
+                title: store.name
+            })
+            markerArr.push(marker)
+        }// end for
+    }
+
+    //목록선택창
+    document.querySelector(".menuDiv").addEventListener("click", (e)=>{
+        e.preventDefault()
+        e.stopPropagation()
+        const target = e.target
+        // console.log(target)
+        if(target.tagName !== 'A'){
+            return
+        }
+        // console.log("A태그 클릭")
+        // getAttribute 중요, setAttribute 생각
+        // console.log(target.getAttribute("href"))
+
+        const keyword = target.getAttribute("href")
+
+        if(keyword !== '전체'){
+            const result = arr.filter(s => s.menu === keyword)
+
+            showMarkers(result)
+        }else{
+            showMarkers(arr)
+        }
+    }, false)
+</script>
+
+<script>
+    function loadData(serverInfo){
+        // console.log("loadData: " + serverInfo)
+        fetch(serverInfo).then((response) => response.json())
+            .then(data => {
+                //  console.log(data)
+                makeList(data)
+                showMarkers(data)
+            })
+        //가게 목록 화면 출력
+        function makeList(arr){
+            const ulEle=document.querySelector(".storeList")
+            let str = ''
+
+            for (let i = 0; i < arr.length; i++) {
+                // console.log(arr[i])
+                str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" data-img="${arr[i].img}">${arr[i].name}</li>`
+            }
+            ulEle.innerHTML = str
+        }
+        function makeList2(arr){
+            const ulEle=document.querySelector(".storeList")
+            let str = ''
+
+            for (let i = 0; i < arr.length; i++) {
+                // console.log(arr[i])
+                str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" data-img="${arr[i].img}">${arr[i].name}</li>`
+                str += `<img src="${arr[i].img}">`
+
+            }
+            ulEle.innerHTML = str
+        }
+        // .storeList 안에 있는 누르면  개체를 누르면
+        document.querySelector(".storeList").addEventListener("click",(e)=>{
+            e.stopPropagation()
+            e.preventDefault()
+            //li만 잡히게
+            const target = e.target
+
+            //li가 아닌걸 누르면 안나옴옴
+           if(target.tagName !== 'LI'){
+                return
+            }
+            // console.log(target)
+            const name = target.getAttribute("data-name")
+            const lat = target.getAttribute("data-lat")
+            const lng = target.getAttribute("data-lng")
+            const img = target.getAttribute("data-img")
+            // console.log(name,lat,lng)
+            let storeLI = [{name: `${name}`, lat: `${lat}`, lng: `${lng}`,  img:`${img}`}]
+            showMarkers(storeLI)
+            makeList2(storeLI)
+        }, false)
+
+    }
+</script>
+
+</body>
+</html>

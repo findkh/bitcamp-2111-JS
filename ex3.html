@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <button onclick="loadData('http://localhost:5555/w17/1team.json')">1팀</button>
+    <button onclick="loadData('http://localhost:5555/w17/2team.json')">2팀</button>
+    <button onclick="loadData('http://localhost:5555/w17/3team.json')">3팀</button>
+</div>
+
+<ul class="storeList">
+
+</ul>
+
+<script>
+
+    function loadData(serverInfo){
+
+        console.log("loadData: " + serverInfo )
+
+        fetch(serverInfo)
+            .then(  response => response.json()) //데이터를 가지고 오면
+                //데이터 가져오면 콜백함수를 가지고 뭘 해줘 라고 함
+                // 서버에서 데이터를 가져옴
+            .then(  data => {
+                // 서버에서 추출함
+                //console.log(data)
+                makeList(data)
+            })
+    }
+
+
+    //화면에 뿌리기
+    function makeList(arr){
+        const ulEle = document.querySelector(".storeList")
+          //ul이 클래스라 .storeList 라 찍음
+        let str = ''
+          //문자열 선언
+
+        for (let i = 0; i < arr.length ; i++) {
+         //li 태그 만드는 for문
+            console.log(arr[i]) // 가게 리스트들이 나옴
+            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li>`
+
+        }//end for
+
+
+        ulEle.innerHTML = str
+    }
+
+
+
+
+    document.querySelector(".storeList").addEventListener("click", (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        const target = e.target
+
+        if(target.tagName !== 'li'){
+            return
+        }
+
+        console.log(target)
+        const name = target.getAttribute("data-name")
+        const lat = target.getAttribute("data-lat")
+        const lng = target.getAttribute("data-lng")
+
+        console.log(name, lat, lng)
+
+    },false)
+
+</script>
+
+</body>
+</html>
