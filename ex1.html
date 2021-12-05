@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+
+<style>
+    .red{
+        color: red;
+
+    }
+</style>
+
+<h1 >AAA</h1>
+<!--<h1 >BBB</h1>-->
+<!--<h1 >CCC</h1>-->
+
+<a href="mp3/aaa.mp3">AAAAAAAAAAAAAA</a>
+
+
+<!--즉시실행함수 제이쿼리-->
+
+
+<script>
+
+    // $("h1").addClass("red").on("click",(e)=>{
+    //     alert("AAAA")
+    // })
+
+    const aaa = document.querySelector("h1")
+    // aaa.innerHTML ='bbbb'
+
+    const bbb = $("h1")
+    // aaa.get(0).innerHTML ='bbbb'
+    // bbb[0].innerHTML="bbbb"
+
+
+    bbb.html("BBB")
+    //파라미터가 있으면 setter
+    console.log(bbb.html())
+    //없으면 inner html 가져온다 getter
+
+    // $("a").attr("href")
+    //getter 속성의 값을 읽어옴
+    $("a").atter("href", "mp3/ccc.mp3")
+
+</script>
+
+
+</body>
+</html>
