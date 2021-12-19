@@ -48,9 +48,7 @@ for (let i = 0; i < menus_coffee.length; i++) {
 }
 menuList.innerHTML = str;
 
-menuList.addEventListener(
-    "click",
-    (e) => {
+menuList.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         //console.log(e)
@@ -113,7 +111,7 @@ for (let i = 0; i < menus_flatccino.length; i++) {
     str3 += `<div class="col">
                 <div dessert-idx="${i}">
                   <img src = "${menu.picture}">
-                  <button class="btn btn-sm btn-danger mt-1">c</button>
+                  <button class="btn btn-sm btn-danger mt-1">취소</button>
                   <div class="card-body">
                     <div>${menu.name}</div>
                     <div>${menu.price}</div>
